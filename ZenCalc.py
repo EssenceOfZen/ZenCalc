@@ -20,15 +20,20 @@ print("#  | | | | | |  __/ \  /\  / (_) | | |  #")
 print("#  \_/ |_| |_|\___|  \/  \/ \___/|_|_|  #")
 print("#=======================================#")
 print("#           Complex Calculator          #")
-print("#             Version: 0.1.5            #")
+print("#             Version: 0.2.8            #")
 print("#=======================================#")
 #Imports and Client-side Settings================
+import time
 import py_compile
 py_compile.compile("ZenCalc.py")
 
 #Global Variables================================
 number1 = 0
 number2 = 0
+answer = 0
+storage = 0
+
+temporary_list = []
 
 base = 0
 exponent = 0
@@ -61,6 +66,7 @@ def power():
     for number in range(exponent):
         answer *= base
         print(str(base) + "^" + str(exponent) + " = " + str(answer))
+    
         
 
 def multiply():
@@ -68,30 +74,45 @@ def multiply():
     number2 = float(input("Input number2: "))
     answer = number1 * number2
     print(str(number1) + " + " + str(number2) + " = " + str(answer))
+    
 
 def divide():
     loop=1
     while loop==1:    
         number1 = float(input("Input number1: "))
         number2 = float(input("Input number2: "))
-        if number2 <= 0:
+        if number2 == 0:
             print("Cannot divide by 0...)")
         else:
             answer = number1 / number2
             loop = 0
             print(answer)
-
+    
+    
 def addition():
     number1 = float(input("Input number1: "))
     number2 = float(input("Input number2: "))
     answer = number1 + number2
     print(answer)
-
+    
+    
 def subtraction():
     number1 = float(input("Input number1: "))
     number2 = float(input("Input number2: "))
     answer = number1 - number2
-    print(answer)
+    
+    
+
+def factors():
+    number1 = input("First Number: ")
+    number2 = input("How many checks: ")
+    storage = 0
+    for number in range(0, int(number2)):
+        answer = int(number1) * (storage + 1)
+        temporary_list.append(answer)
+        storage += 1
+    print(temporary_list)
+            
 
 def slope():
     x1 = float(input("Input x1: "))
@@ -102,6 +123,7 @@ def slope():
     y_sum = y1 - y2
     slope = y_sum / x_sum
     print("The slope is: " + str(slope))
+    
 
 def decimal_to_percent():
     number1 = float(input("Input number: "))
@@ -112,10 +134,14 @@ def decimal_to_percent():
         number2 = float(input(str(number1) + " out of how many?: "))
         answer = number1 / number2 * 100
         print(str(answer) + "%")
+    
 
 def percent_to_decimal():
     number1 = float(input("Input percentage, without the %: "))
     answer = number1 / 100
+
+
+
 
 def programmer_tools():
         print("|==========================================|")
@@ -128,10 +154,33 @@ def programmer_tools():
         print("| [Bin to Dec]                             |")
         print("| [Bin to Hex]                             |")
         print("| [Bin to Octal]                           |")
-        print("| [Decimal to Percent]                     |")
-        print("| [Percent to Decimal]                     |")
+        print("|                                          |")
+        print("|                                          |")
         print("| [Exit]                                   |")
         print("|==========================================|")
+#****************************************
+        
+def formulas():
+        print("|==========================================|")
+        print("| Formulas                                 |")
+        print("|==========================================|")
+        print("|:Operations:                              |")
+        print("| [1] y=mx-b {Includes optional exponents} |")
+        print("|                                          |")
+        print("| [Exit]                                   |")
+        print("|==========================================|")
+
+def ymxb():
+    y = 0
+    m = input("Please enter the slope in the form of a decimal or whole number: ")
+    x = 0
+    x_exponent = 0
+    mx_exponent = 0
+    b = input("Input [b]: ")
+    b_exponent = 0
+
+    user_choice =
+    
     
 
 
@@ -148,12 +197,14 @@ def main():
         print("| *[Check Variables]                       |")
         print("| *[Small Graph]                           |")
         print("| *[Programmer Tools]                      |")
+        print("| *[Formulas]                              |")
         print("|                                          |")
         print("|                                          |")
         print("| [Add]                                    |")
         print("| [Subtract]                               |")
         print("| [Multiply]                               |")
         print("| [Divide]                                 |")
+        print("| [Factors]                                |")
         print("| [Exponent]                               |")
         print("| [Slope]                                  |")
         print("| [Decimal to Percent]                     |")
@@ -161,7 +212,7 @@ def main():
         print("| [Exit]                                   |")
         print("|==========================================|")
         
-        user_input = input("What Operation would you like to perform?").lower()
+        user_input = input("What Operation would you like to perform?: ").lower()
         if user_input == "add":
             addition()
         elif user_input == "subtract":
@@ -176,6 +227,8 @@ def main():
             slope()
         elif user_input == "decimal to percent":
             decimal_to_percent()
+        elif user_input == "factors":
+            factors()
 
         elif user_input == "exit":
             main_loop = 0
